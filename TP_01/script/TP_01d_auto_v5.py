@@ -1,6 +1,7 @@
 import random
 import sys  # module for reading command line arguments
 import pprint as pprint  # module for pretty printing data
+import time  # module for measuring execution time
 
 
 def read_bed(filename):
@@ -46,9 +47,6 @@ tfact = read_bed(sys.argv[2])  # Transcription factor file passed as second argu
 # Get the number of random genes and TFs from command-line arguments, with max if not provided
 chromosome = sys.argv[5] if len(sys.argv) > 5 else "chr12"  # Default is "chr12"
 
-# Get the number of random genes and TFs from command-line arguments, with max if not provided
-chromosome = sys.argv[5] if len(sys.argv) > 5 else "chr12"  # Default is "chr12"
-
 # Get the number of available genes and transcription factors for the specified chromosome
 num_genes = (
     int(sys.argv[3])
@@ -60,6 +58,7 @@ num_tfacts = (
     if len(sys.argv) > 4 and sys.argv[4].isdigit()
     else len(tfact.get(chromosome, {}))
 )
+
 # Select random genes and transcription factors from the specified chromosome
 random_genes = random.sample(
     list(genes[chromosome].keys()), min(num_genes, len(genes[chromosome]))
@@ -81,14 +80,24 @@ pprint.pprint(selected_genes)
 print(f"{num_tfacts} selected TFs on {chromosome}:")
 pprint.pprint(selected_tfacts)
 
+# Start the timer to measure the execution time
+start_time = time.time()
+
 # Calculate the distances between the selected genes and transcription factors on the given chromosome
 distances = calculate_distances(selected_genes, selected_tfacts, chromosome)
 
-# Print the results for the selected genes and transcription factors
-print(f"Distances between selected genes and transcription factors on {chromosome}:")
-pprint.pprint(distances)
+# Print the distances that are equal to 0
+print(f"Distances equal to 0 (overlap or inclusion):")
+zero_distances = {key: value for key, value in distances.items() if value == 0}
+pprint.pprint(zero_distances)
 
-# Example usage:
-# python TP_01/script/TP_01d_auto_V4.py TP_01/data/gene_chr12.bed TP_01/data/tf_chr12.bed 15 20 chr12
-# python TP_01/script/TP_01d_auto_V4.py TP_01/data/gene_chr12.bed TP_01/data/tf_chr12.bed  chr12
-# in this code we can don't put the number of genes and TFs and it will take all the genes and TFs in the file
+# End the timer
+end_time = time.time()
+
+# Print the time taken to run the script
+execution_time = end_time - start_time
+print(f"Execution time: {execution_time:.4f} seconds")
+
+# python TP_01/script/TP_01d_auto_V5.py TP_01/data/gene_chr12.bed TP_01/data/tf_chr12.bed 15 20 chr12
+# only the 0 distances are printed
+# Execution time is printed in seconds
