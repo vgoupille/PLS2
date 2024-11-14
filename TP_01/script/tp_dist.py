@@ -26,3 +26,5 @@ with open(
         )  # permet de convertir les valeurs en entier
 
 pprint.pp(genes)
+
+# python tp_dist.py TP_01/data/tf_400.bed
