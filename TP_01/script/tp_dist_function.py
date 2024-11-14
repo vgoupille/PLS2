@@ -1,4 +1,4 @@
-import sys
+import sys  # module pour lire les arguments passés en ligne de commande
 import pprint as pprint  # module pour afficher des données de manière plus lisible
 
 
