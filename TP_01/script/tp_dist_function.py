@@ -18,5 +18,7 @@ def read_bed(filename):
 genes = read_bed(sys.argv[1])
 tfact = read_bed(sys.argv[2])
 
+pprint.pp(genes["chrX"])
+pprint.pp(tfact["chrX"])
 
 # python TP_01/script/tp_dist_function.py TP_01/data/tf_400.bed
