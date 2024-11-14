@@ -1,8 +1,28 @@
-"""with open(
-    "/Users/valentingoupille/Library/Mobile Documents/com~apple~CloudDocs/University/Master_Bioinfo/PYT/PLS2/PLS2/TP_01/script/TP_01.ipynb",
+import sys
+
+filename = sys.argv[
+    1
+]  # liste des arguments passés en ligne de commande (argv[0] est le nom du script), argv est une liste
+
+
+# creation d'un dictionnaire pour stocker les positions des gènes
+genes = {}
+with open(
+    "filename",
     "r",
 ) as file:
-    content = file.read()
-    print(type(content))
-    print(len(content))
-    print(content)"""
+    for line in file:
+        data = line.strip().split()
+        chrom, start, stop, name = data[:4]
+        if (
+            chrom not in genes
+        ):  # si la clé chrom n'existe pas dans le dictionnaire genes
+            genes[chrom] = (
+                {}
+            )  # on crée une nouvelle clé chrom dans le dictionnaire genes
+        genes[chrom][name] = (
+            int(start),
+            int(stop),
+        )  # permet de convertir les valeurs en entier
+
+pprint.pp(genes)
