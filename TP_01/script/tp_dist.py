@@ -31,4 +31,4 @@ pprint.pp(genes)
 
 # script a executer dans le terminal
 
-# python TP_01/script/tp_dist.py TP_01/data/tf_400.bed
+#  python TP_01/script/tp_dist.py TP_01/data/tf_400.bed
