@@ -73,4 +73,4 @@ distances = calculate_distances(selected_genes, selected_tfacts, chromosome)
 print(f"Distances between selected genes and transcription factors on {chromosome}:")
 pprint.pprint(distances)
 
-# python TP_01/script/TP_01d_auto.py  TP_01/data/gene_chr12.bed TP_01/data/tf_chr12.bed
+# python TP_01/script/TP_01d_autov1.py  TP_01/data/gene_chr12.bed TP_01/data/tf_chr12.bed
