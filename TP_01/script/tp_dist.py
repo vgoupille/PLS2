@@ -1,8 +1,8 @@
 import sys
+import pprint as pprint  # module pour afficher des données de manière plus lisible
 
-filename = sys.argv[
-    1
-]  # liste des arguments passés en ligne de commande (argv[0] est le nom du script), argv est une liste
+filename = sys.argv[1]
+# liste des arguments passés en ligne de commande (argv[0] est le nom du script), argv est une liste
 
 
 # creation d'un dictionnaire pour stocker les positions des gènes
