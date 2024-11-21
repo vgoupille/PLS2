@@ -1,6 +1,124 @@
-# Intro : explication de panda 
-
-import pandas as pd
-
+---
+title: "TP_Pandas : Analyse du dataset Titanic"
+format: "html"
+author: "Valentin Goupille"
+date: "2024-11-21"
+---
+# Intro : explication de pandas 
 col correspond à la colonne
 index correspond à la ligne est un identifiant unique pour chaque ligne
+
+il y a 3 types de données en pandas : 
+    - les séries : une seule colonne
+    - les dataframes : plusieurs colonnes
+    - les panels : plusieurs dataframes
+
+```{python}
+import pandas as pd
+```
+
+
+```{python}
+titanic = pd.read_csv('/Users/valentingoupille/Library/Mobile Documents/com~apple~CloudDocs/University/Master_Bioinfo/PYT/PLS2/TP_01/TP_02/data/titanic.csv')
+print(titanic)
+```
+
+```{python}
+print (titanic.dtypes)
+```
+
+```{python}
+titanic.to_excel('titanic.xlsx', sheet_name='passengers', index=False)
+```
+
+
+```{python}
+titanic.info()
+```
+
+
+```{python}
+titanic.shape
+```
+
+
+```{python}
+print(titanic.head())
+```
+
+
+```{python}
+print (titanic['Age']) # sort une série (une colonne )
+```
+
+
+```{python}
+print (titanic['Age'].describe())
+```
+
+
+```{python}
+print (titanic.describe())
+```
+
+
+```{python}
+print (titanic[["Age","PassengerId", "Cabin"]])
+
+```
+
+
+```{python}
+print (titanic[["Name","Age","PassengerId", "Cabin"]])
+
+```
+
+## Utilisation de Iloc 
+```{python}
+print (titanic.iloc[1,3])
+#permet de voir colonne 1 et ligne 3
+
+print (titanic.iloc[:5, :4])
+
+sub_titanic = titanic.iloc[:5, :4]
+print (sub_titanic)
+```
+
+**Iloc est la méthode pour sélectionner des lignes et des colonnes par leur position dans le dataframe.
+mais est vraiment trop lente 
+On ne l'utilise pas pour des gros dataset donc plus jamais **
+
+
+```{python}
+print (titanic ["Age"]+1)
+```
+
+
+```{python}
+print (titanic ["Age"]==32) # renvoie une série de booléen True or False 
+
+#Il s'agit d'un filtre 
+
+#fait la meme chose que
+survivors_filter = titanic["Survived"]  == 1
+print ( titanic.loc[survivors_filter]) 
+#loc permet de selectionner sur des critères ici on selectionne les survivants (Survived == 1)
+```
+
+
+```{python}
+print (titanic.loc[survivors_filter & (titanic["Age"] <=25)])
+```
+
+
+## permet de faire des requetes  de la meme maniere
+
+
+```{python}
+print ( titanic.query('Survived == 1 and  Age <= 25'))
+
+#affiche les survivants de moins de 25 ans
+#je veux le tableau complet maintenant 
+
+```
+
