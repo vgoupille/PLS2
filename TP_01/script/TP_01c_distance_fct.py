@@ -19,3 +19,20 @@ def distance_gene_tf(start_gene, stop_gene, start_tf, stop_tf):
         return start_tf - stop_gene  ## distance = start_tf - stop_gene
     else:  # le cas ou le facteur de transcription est avant le gène
         return start_gene - stop_tf  ## distance = start_gene - stop_tf
+
+
+def distance_gene_tf2(start_gene, stop_gene, start_tf, stop_tf):
+    res = 0
+    if stop_gene < start_tf:
+        res = start_tf - stop_gene
+    elif stop_tf < start_gene:
+        res = start_gene - stop_tf
+    return res
+
+
+def distance_gene_tf3(start_gene, stop_gene, start_tf, stop_tf):
+    if stop_gene < start_tf:
+        return start_tf - stop_gene
+    if stop_tf < start_gene:
+        return start_gene - stop_tf
+    return 0
