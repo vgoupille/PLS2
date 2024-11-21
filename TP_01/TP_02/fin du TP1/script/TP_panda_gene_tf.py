@@ -64,3 +64,7 @@ execution_time = end_time - start_time
 print(f"Execution time: {execution_time:.4f} seconds")
 
 # python "TP_01/TP_02/fin du TP1/script/TP_panda_gene_tf.py" TP_01/data/gene_300.bed TP_01/data/tf_400.bed
+
+
+# n'est pas vraiment optimal car on parcourt ligne par ligne  donc l'algo est long
+# panda prefere column par column
