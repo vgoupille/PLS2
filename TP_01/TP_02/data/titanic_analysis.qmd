@@ -1,0 +1,6 @@
+# Intro : explication de panda 
+
+import pandas as pd
+
+col correspond à la colonne
+index correspond à la ligne est un identifiant unique pour chaque ligne
