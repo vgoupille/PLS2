@@ -10,4 +10,4 @@ donnée
 script `soutenance + questions 
 
 
-
+pytest -v --tb=no test_kata1.py
