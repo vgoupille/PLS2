@@ -27,20 +27,23 @@ if __name__ == "__main__":
     dfg.columns = ["chr", "startg", "stopg", "gene"]
     dft.columns = ["chr", "startt", "stopt", "tf"]
 
-    # Merge dataframes on chromosome
-    merged_df = pd.merge(dfg, dft, on="chr", suffixes=("_gene", "_tf"))
+    # Group by chromosome
+    group_gene = dfg.groupby("chr")
+    group_ft = dft.groupby("chr")
 
-    # Calculate distances and filter
-    merged_df["distance"] = merged_df.apply(
-        lambda row: distance(row["startg"], row["stopg"], row["startt"], row["stopt"]),
-        axis=1,
-    )
-    filtered_df = merged_df[merged_df["distance"] < 500000]
+    # Result list to store calculated distances
+    results = []
 
-    # Write results to file
-    filtered_df[["gene", "tf", "chr", "distance"]].to_csv(
-        "results.csv", index=False, header=False
-    )
-
+    with open("TP_03/result4.csv", "w", encoding="utf-8") as output_file:
+        for chrom, sub_gene in group_gene:
+            if chrom in group_ft.groups:
+                sub_ft = group_ft.get_group(chrom)
+                df_full = pd.merge(sub_gene, sub_ft, how="left", on=("chr"))
+                for _, row in df_full.iterrows():
+                    d = distance(
+                        row["startg"], row["stopg"], row["startt"], row["stopt"]
+                    )
+                    if d < 500000:
+                        output_file.write(f"{row['gene']},{row['tf']},{chrom},{d}\n")
     # Print the elapsed time
     print(f"Elapsed time: {time.time() - start_time} seconds")
