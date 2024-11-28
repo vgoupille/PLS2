@@ -122,3 +122,7 @@ print ( titanic.query('Survived == 1 and  Age <= 25'))
 
 ```
 
+```{python}
+if __name__ == "__main__":
+    print (titanic.query('Survived == 1 and  Age <= 25'))
+```
